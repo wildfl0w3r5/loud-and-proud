@@ -11,7 +11,8 @@ export default function EventForm({ organizerId }: { organizerId: number }) {
     description: "",
     location: "",
     capacity: 100,
-    date: ""
+    date: "",
+    price:  0
   })
 
   const router = useRouter()
@@ -26,7 +27,7 @@ export default function EventForm({ organizerId }: { organizerId: number }) {
     const res = await fetch("/api/events", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...form, organizerId, capacity: Number(form.capacity), image: imageUrl })
+      body: JSON.stringify({ ...form, organizerId, capacity: Number(form.capacity), price: Number(form.price), image: imageUrl})
     })
 
     if (res.ok) {
@@ -44,6 +45,7 @@ export default function EventForm({ organizerId }: { organizerId: number }) {
       <input name="location" placeholder="Location" onChange={handleChange} className="border p-2 w-full" required />
       <input name="date" type="datetime-local" onChange={handleChange} className="border p-2 w-full" required />
       <input name="capacity" type="number" placeholder="Capacity" onChange={handleChange} className="border p-2 w-full" />
+      <input name="price" type="number" placeholder="Ticket price (in NPR)" onChange={handleChange} className="border p-2 w-full" />
       <p className="mt-2 font-medium">Upload Event Poster</p>
       <EventImageUploader onUpload={(url) => setImageUrl(url)} />
       {imageUrl && (

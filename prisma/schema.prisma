@@ -41,7 +41,8 @@ model Event {
   location    String
   date        DateTime
   capacity    Int
-  image       String? 
+  image       String?
+  price       Float    @default(0)
 
   organizer   User @relation("OrganizerEvents", fields: [organizerId], references: [id])
   organizerId Int

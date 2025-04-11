@@ -16,6 +16,7 @@
     "auth": "^1.2.3",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^3.0.2",
+    "khalti-checkout-web": "^2.2.0",
     "next": "15.2.4",
     "next-auth": "^4.24.11",
     "qrcode.react": "^4.2.0",

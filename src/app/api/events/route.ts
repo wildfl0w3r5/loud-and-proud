@@ -6,7 +6,7 @@ const prisma = new PrismaClient()
 export async function POST(req: Request) {
   try {
     const body = await req.json()
-    const { name, description, location, date, capacity, organizerId, image } = body
+    const { name, description, location, date, capacity, price, organizerId, image } = body
 
     const event = await prisma.event.create({
       data: {
@@ -15,6 +15,7 @@ export async function POST(req: Request) {
         location,
         date: new Date(date),
         capacity,
+        price,
         organizerId,
         image
       }

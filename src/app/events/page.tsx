@@ -30,6 +30,7 @@ export default async function EventListPage() {
            <p><strong>Date:</strong> {new Date(event.date).toLocaleString()}</p>
            <p><strong>Location:</strong> {event.location}</p>
            <p><strong>Capacity:</strong> {event.capacity}</p>
+           <p><strong>Price:</strong> NPR {event.price}</p>
          
            {session?.user && (
              <form action="/api/tickets" method="POST">
@@ -43,11 +44,20 @@ export default async function EventListPage() {
                  max={15}
                  className="border px-2 py-1 w-24"
                />
+
+                <label className="block text-sm mb-1">Choose an option:</label>
+                <label className="mr-4">
+                <input type="radio" name="action" value="BOOK" defaultChecked /> Book
+                </label>
+                <label>
+                <input type="radio" name="action" value="BUY" /> Buy
+                </label>
+
                <button
                  type="submit"
                  className="mt-2 bg-green-600 text-white px-4 py-2 rounded"
                >
-                 Buy Ticket
+                 Confirm
                </button>
              </form>
            )}
