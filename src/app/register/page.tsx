@@ -4,6 +4,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import bcrypt from "bcryptjs"
 import { Role } from "@prisma/client"
+import Footer from "../components/Footer"
 
 export default function RegisterPage() {
   const router = useRouter()
@@ -29,36 +30,72 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <form onSubmit={handleSubmit} className="w-full max-w-sm">
-        <h2 className="text-2xl mb-4">Register</h2>
-        <input name="name" placeholder="Name" onChange={handleChange} className="border p-2 w-full mb-2" />
-        <input name="email" type="email" placeholder="Email" onChange={handleChange} className="border p-2 w-full mb-2" />
-        <input name="password" type="password" placeholder="Password" onChange={handleChange} className="border p-2 w-full mb-2" />
-        <div className="mb-2">
-        <label className="block mb-1 font-medium">Register as:</label>
-        <label className="mr-4">
-        <input
-        type="radio"
-        name="role"
-        value="ATTENDEE"
-        checked={form.role === "ATTENDEE"}
-        onChange={(e) => setForm({ ...form, role: e.target.value })}
-        /> Attendee
-        </label>
-        <label>
-        <input
-        type="radio"
-        name="role"
-        value="ORGANIZER"
-        checked={form.role === "ORGANIZER"}
-        onChange={(e) => setForm({ ...form, role: e.target.value })}
-        /> Organizer
-        </label>
-        </div>
+    <div
+      className="min-h-screen flex flex-col justify-center items-center bg-cover bg-center"
+      style={{ backgroundImage: 'url("/bgg.avif")' }}
+    >
+      <div className="bg-[#0a0a0add] backdrop-blur-md p-8 rounded-lg shadow-md w-full max-w-md mx-4">
+        <h2 className="text-3xl font-bold text-primary text-center mb-6">Register</h2>
 
-        <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded w-full">Sign Up</button>
-      </form>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            name="name"
+            placeholder="Name"
+            onChange={handleChange}
+            className="w-full p-3 bg-[#1a1a1a] border border-gray-700 text-white rounded"
+            required
+          />
+          <input
+            name="email"
+            type="email"
+            placeholder="Email"
+            onChange={handleChange}
+            className="w-full p-3 bg-[#1a1a1a] border border-gray-700 text-white rounded"
+            required
+          />
+          <input
+            name="password"
+            type="password"
+            placeholder="Password"
+            onChange={handleChange}
+            className="w-full p-3 bg-[#1a1a1a] border border-gray-700 text-white rounded"
+            required
+          />
+
+          <div className="text-sm text-gray-300">
+            <label className="block mb-1 font-medium">Register as:</label>
+            <label className="mr-4">
+              <input
+                type="radio"
+                name="role"
+                value="ATTENDEE"
+                checked={form.role === "ATTENDEE"}
+                onChange={(e) => setForm({ ...form, role: e.target.value })}
+              />{" "}
+              Attendee
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="role"
+                value="ORGANIZER"
+                checked={form.role === "ORGANIZER"}
+                onChange={(e) => setForm({ ...form, role: e.target.value })}
+              />{" "}
+              Organizer
+            </label>
+          </div>
+
+          <button
+            type="submit"
+            className="border border-primary text-primary px-6 py-2 rounded font-medium hover:bg-primary hover:text-black transition mx-auto block"
+          >
+            Sign Up
+          </button>
+        </form>
+      </div>
+
+      <Footer />
     </div>
   )
 }

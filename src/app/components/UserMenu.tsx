@@ -9,13 +9,13 @@ interface Props {
 export default function UserMenu({ email }: Props) {
   return (
     <div className="mt-4">
-      <p className="mb-2">Logged in as {email}</p>
+      
       <button
         onClick={() => signOut()}
-        className="bg-red-500 text-white px-4 py-2 rounded"
-      >
+        className="border border-primary text-primary px-6 py-2 rounded font-medium hover:bg-primary hover:text-black transition">
         Logout
-      </button>
+        </button>
+      <p className="mb-2">Logged in as {email}</p>
     </div>
   )
 }

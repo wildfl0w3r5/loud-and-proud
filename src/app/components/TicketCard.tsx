@@ -8,8 +8,8 @@ interface Props {
 }
 
 export default function TicketCard({ ticket }: Props) {
-  // For now, use localhost. Later, replace with your actual domain.
-  const qrData = `🎟️ Loud & Proud Ticket\nEvent: ${ticket.event.name}\nTicket ID: ${ticket.id}\nUser ID: ${ticket.userId}`
+  
+  const qrData = `Loud & Proud Ticket\nEvent: ${ticket.event.name}\nTicket ID: ${ticket.id}\nUser ID: ${ticket.userId}`
 
   return (
     <div className="border p-4 rounded shadow">

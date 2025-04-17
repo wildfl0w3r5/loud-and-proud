@@ -33,7 +33,7 @@ export default function TicketVerifyPage() {
 
   return (
     <main className="p-6">
-      <h1 className="text-2xl font-bold mb-4">🎟️ Ticket Verification</h1>
+      <h1 className="text-2xl font-bold mb-4">Ticket Verification</h1>
       <p><strong>Ticket ID:</strong> {ticket.id}</p>
       <p><strong>Event:</strong> {ticket.event.name}</p>
       <p><strong>Location:</strong> {ticket.event.location}</p>
