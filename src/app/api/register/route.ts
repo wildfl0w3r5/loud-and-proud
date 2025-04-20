@@ -16,7 +16,8 @@ export async function POST(req: Request) {
         name,
         email,
         password,
-        role: email === "abhisheksapkota@gmail.com" ? "ADMIN" : (role)
+        role: email === "abhisheksapkota05@gmail.com" ? "ADMIN" : (role),
+        status: true
       }
     })
 

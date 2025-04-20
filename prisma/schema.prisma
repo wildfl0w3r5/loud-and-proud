@@ -20,11 +20,12 @@ model User {
   accounts Account[]
   sessions Session[]
   tickets  Ticket[]
-  
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   Report    Report[]
+
+  paymentSessions PaymentSession[]
 }
 
 enum Role {
@@ -47,7 +48,8 @@ model Event {
   organizerId Int
 
   tickets Ticket[]
-  
+
+  paymentSessions PaymentSession[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -106,4 +108,16 @@ model Report {
   fromUser   User     @relation(fields: [fromUserId], references: [id])
   fromUserId Int
   createdAt  DateTime @default(now())
+}
+
+model PaymentSession {
+  id        Int      @id @default(autoincrement())
+  pidx      String   @unique
+  userId    Int
+  eventId   Int
+  quantity  Int
+  createdAt DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id])
+  event Event @relation(fields: [eventId], references: [id])
 }

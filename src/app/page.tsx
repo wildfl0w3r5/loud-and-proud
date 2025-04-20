@@ -22,20 +22,20 @@ export default async function Home() {
         <div className="flex gap-6 mb-16">
           <Link
             href="/register"
-            className="border border-primary text-primary px-6 py-2 rounded font-medium hover:bg-primary hover:text-black transition"
+            className="border border-primary text-primary px-6 py-2 rounded font-medium hover:bg-primary hover:text-white transition"
           >
             Register
           </Link>
           <Link
             href="/login"
-            className="border border-primary text-primary px-6 py-2 rounded font-medium hover:bg-primary hover:text-black transition"
+            className="border border-primary text-primary px-6 py-2 rounded font-medium hover:bg-primary hover:text-white transition"
           >
             Login
           </Link>
         </div>
       ) : (
         <div className="flex flex-col gap-6 mb-16">
-          <Link href="/dashboard" className="border border-primary text-primary px-6 py-2 rounded font-medium hover:bg-primary hover:text-black transition">Go to Dashboard</Link>
+          <Link href="/dashboard" className="border border-primary text-primary px-6 py-2 rounded font-medium hover:bg-primary hover:text-white transition">Go to Dashboard</Link>
           <UserMenu email={session.user?.email || ""} />
         </div>
       )}

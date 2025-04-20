@@ -11,7 +11,7 @@ export default function EventImageUploader({
   return (
     <div className="relative w-full text-center">
       
-      <label className="cursor-pointer border border-primary text-primary px-6 py-2 rounded font-medium hover:bg-primary hover:text-black transition mx-auto block ">
+      <label className="cursor-pointer border border-primary text-primary px-6 py-2 rounded font-medium hover:bg-primary hover:text-white transition mx-auto block ">
         Upload Event Poster
 
         

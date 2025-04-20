@@ -36,7 +36,7 @@ export default async function EventListPage({ searchParams }: { searchParams: { 
             placeholder="Search by location..."
             defaultValue={searchParams.location || ""}
             className="w-full sm:w-80 px-4 py-2 rounded bg-[#1a1a1a] border border-gray-600 text-white"/>
-          <button type="submit" className="ml-auto border border-white text-white px-6 py-2 rounded font-medium hover:bg-primary hover:text-black transition">
+          <button type="submit" className="ml-auto border border-white text-white px-6 py-2 rounded font-medium hover:bg-primary hover:text-white transition">
             Search
           </button>
         </form>
@@ -85,7 +85,7 @@ export default async function EventListPage({ searchParams }: { searchParams: { 
 
                     <button
                       type="submit"
-                      className="border border-primary text-primary px-6 py-2 rounded font-medium hover:bg-primary hover:text-black transition mx-auto block"
+                      className="border border-primary text-primary px-6 py-2 rounded font-medium hover:bg-primary hover:text-white transition mx-auto block"
                     >
                       Confirm
                     </button>

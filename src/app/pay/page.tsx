@@ -1,27 +1,52 @@
-import { PrismaClient } from "@prisma/client"
-import { notFound, redirect } from "next/navigation"
+"use client"
 
-interface SearchParams {
-  searchParams: {
-    eventId?: string
-    quantity?: string
+import { useState, useEffect } from "react"
+import { useSearchParams } from "next/navigation"
+
+export default function PayPage() {
+  const searchParams = useSearchParams()
+  const [event, setEvent] = useState<any>(null)
+  const [loading, setLoading] = useState(false)
+
+  const eventId = Number(searchParams.get("eventId"))
+  const quantity = Number(searchParams.get("quantity"))
+
+  useEffect(() => {
+    const fetchEvent = async () => {
+      if (!eventId || !quantity || quantity < 1) return
+      const res = await fetch(`/api/events/get?id=${eventId}`)
+      const data = await res.json()
+      setEvent(data)
+    }
+
+    fetchEvent()
+  }, [eventId, quantity])
+
+  const total = event ? event.price * quantity : 0
+
+  const handlePay = async () => {
+    setLoading(true)
+
+    const res = await fetch("/api/pay", {
+      method: "POST",
+      body: new URLSearchParams({
+        eventId: String(eventId),
+        quantity: String(quantity),
+        amount: String(total),
+      })
+    })
+
+    const data = await res.json()
+
+    if (data.payment_url) {
+      window.location.href = data.payment_url
+    } else {
+      alert("Failed to initiate payment")
+      setLoading(false)
+    }
   }
-}
 
-export default async function PayPage({ searchParams }: SearchParams) {
-  const prisma = new PrismaClient()
-  const eventId = Number(searchParams.eventId)
-  const quantity = Number(searchParams.quantity)
-
-  if (!eventId || !quantity || quantity < 1) redirect("/events")
-
-  const event = await prisma.event.findUnique({
-    where: { id: eventId }
-  })
-
-  if (!event) notFound()
-
-  const total = quantity * event.price
+  if (!event) return <p className="p-6">Loading event...</p>
 
   return (
     <main className="p-6 max-w-xl mx-auto space-y-4">
@@ -38,20 +63,18 @@ export default async function PayPage({ searchParams }: SearchParams) {
       <div className="space-y-2">
         <p><strong>Event:</strong> {event.name}</p>
         <p><strong>Location:</strong> {event.location}</p>
-        <p><strong>Ticket Price:</strong> NPR {event.price.toFixed(2)}</p>
+        <p><strong>Ticket Price:</strong> NPR {event.price}</p>
         <p><strong>Quantity:</strong> {quantity}</p>
-        <p className="text-lg font-semibold"><strong>Total:</strong> NPR {(total).toFixed(2)}</p>
+        <p className="text-lg font-semibold"><strong>Total:</strong> NPR {total.toFixed(2)}</p>
       </div>
 
-      <form method="POST" action="/api/pay">
-        <input type="hidden" name="eventId" value={eventId} />
-        <input type="hidden" name="quantity" value={quantity} />
-        <input type="hidden" name="amount" value={total} />
-
-        <button type="submit" className="bg-purple-700 text-white px-5 py-2 rounded">
-          Pay Now
-        </button>
-      </form>
+      <button
+        onClick={handlePay}
+        disabled={loading}
+        className="bg-purple-700 text-white px-5 py-2 rounded"
+      >
+        {loading ? "Redirecting..." : "Pay Now"}
+      </button>
     </main>
   )
 }

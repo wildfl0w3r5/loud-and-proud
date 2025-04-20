@@ -51,7 +51,7 @@ export default function EventForm({ organizerId }: { organizerId: number }) {
       {imageUrl && (
       <img src={imageUrl} alt="Preview" className="w-full max-h-64 object-cover rounded border mt-2" />
       )}
-      <button type="submit" className="border border-primary text-primary px-6 py-2 rounded font-medium hover:bg-primary hover:text-black transition mx-auto block">Create Event</button>
+      <button type="submit" className="border border-primary text-primary px-6 py-2 rounded font-medium hover:bg-primary hover:text-white transition mx-auto block">Create Event</button>
     </form>
   )
 }
