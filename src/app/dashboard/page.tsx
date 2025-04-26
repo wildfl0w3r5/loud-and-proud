@@ -77,20 +77,45 @@ export default async function DashboardPage() {
 
                   <Link
                     href={`/eventid?id=${event.id}`}
-                    className="border border-primary text-primary px-6 py-2 rounded font-medium hover:bg-primary hover:text-black transition"
+                    className="border border-primary text-primary px-6 py-2 rounded font-medium hover:bg-primary hover:text-white transition"
                   >
                     View Attendees
                   </Link>
 
                   <div className="flex gap-4 mt-2 text-sm">
-                    <Link
+
+                  <form
+                    action="/api/announcements"
+                    method="POST"
+                    className="mt-4 flex flex-col gap-2"
+                  >
+                    <input type="hidden" name="eventId" value={event.id} />
+                    <textarea
+                      name="message"
+                      placeholder="Write an announcement..."
+                      required
+                      className="w-full p-2 rounded bg-[#1a1a1a] border border-gray-600 text-white"
+                    />
+                    <button
+                      type="submit"
+                      className="border border-primary text-primary px-6 py-2 rounded font-medium hover:bg-primary hover:text-white transition self-start"
+                    >
+                      Post Announcement
+                    </button>
+                  </form>
+                  </div>
+                  
+                  <div className="flex gap-4">
+                  <Link
                       href={`/edit-event?id=${event.id}`}
-                      className="text-blue-400 underline"
+                      className="border border-primary text-primary px-6 py-2 rounded font-medium hover:bg-primary hover:text-white transition"
                     >
                       Edit
-                    </Link>
-                    <DeleteEventButton eventId={event.id} />
+                  </Link>
+
+                  <DeleteEventButton eventId={event.id} />
                   </div>
+                  
                 </li>
               )
             })}

@@ -51,6 +51,8 @@ model Event {
 
   paymentSessions PaymentSession[]
 
+  announcements Announcement[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -120,4 +122,13 @@ model PaymentSession {
 
   user  User  @relation(fields: [userId], references: [id])
   event Event @relation(fields: [eventId], references: [id])
+}
+
+model Announcement {
+  id        Int      @id @default(autoincrement())
+  message   String
+  createdAt DateTime @default(now())
+  
+  event     Event    @relation(fields: [eventId], references: [id])
+  eventId   Int
 }

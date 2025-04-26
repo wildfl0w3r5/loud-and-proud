@@ -15,7 +15,8 @@ export default async function EventListPage({ searchParams }: { searchParams: { 
     where: locationQuery
       ? { location: { contains: locationQuery, mode: "insensitive" } }
       : {},
-    orderBy: { date: "asc" }
+    orderBy: { date: "asc" },
+    include: { announcements: true}
   })
 
   return (
@@ -61,6 +62,20 @@ export default async function EventListPage({ searchParams }: { searchParams: { 
                 <p>Location: {event.location}</p>
                 <p>Capacity: {event.capacity}</p>
                 <p>Price: NPR {event.price}</p>
+
+                {event.announcements.length > 0 && (
+                  <div className="mt-4 p-4 bg-[#1f1f1f] rounded">
+                    <h3 className="text-lg font-semibold mb-2 text-primary">Announcements:</h3>
+                    <ul className="list-disc list-inside space-y-2">
+                      {event.announcements.map((announcement) => (
+                        <li key={announcement.id} className="text-gray-300">
+                          {announcement.message}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
 
                 {session?.user && (
                   <form action="/api/tickets" method="POST">

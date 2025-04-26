@@ -28,7 +28,7 @@ export default function DeleteEventButton({ eventId }: { eventId: number }) {
   return (
     <button
       onClick={handleDelete}
-      className="text-red-600 underline"
+      className="border border-primary text-primary px-6 py-2 rounded font-medium hover:bg-primary hover:text-white transition"
       disabled={isSubmitting}
     >
       {isSubmitting ? "Deleting..." : "Delete"}
