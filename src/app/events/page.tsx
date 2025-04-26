@@ -46,12 +46,12 @@ export default async function EventListPage({ searchParams }: { searchParams: { 
         ) : (
           <ul className="space-y-8">
             {events.map((event) => (
-              <li key={event.id} className="bg-[#121212] border border-gray-700 p-5 rounded shadow space-y-2">
+              <li key={event.id} className="bg-[#121212] border border-gray-700 p-5 rounded-lg shadow transition-all duration-300 hover:brightness-110 hover:scale-[1.015] hover:shadow-lg">
                 {event.image && (
                   <img
                     src={event.image}
                     alt={event.name}
-                    className="w-full h-48 object-cover rounded"
+                    className="w-full max-h-[600px] object-contain rounded border border-gray-700"
                   />
                 )}
 
