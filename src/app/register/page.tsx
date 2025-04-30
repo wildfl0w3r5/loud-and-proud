@@ -25,7 +25,7 @@ export default function RegisterPage() {
       headers: { "Content-Type": "application/json" }
     })
 
-    if (res.ok) router.push("/login")
+    if (res.ok) alert("Registration successful!")
     else alert("Registration failed!")
   }
 
